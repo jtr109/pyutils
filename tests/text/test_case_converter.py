@@ -1,14 +1,29 @@
 import datetime
 from unittest import TestCase
 
-from pyutils.text import camel_to_snake
+from pyutils.text import camel2snake, snake_to_camel
 
 
 class CaseConverterTestCase(TestCase):
 
-    def test_camel_case_to_lower_case(self):
-        self.assertEqual(camel_to_snake('snakesOnAPlane'), 'snakes_on_a_plane')
-        self.assertEqual(camel_to_snake('SnakesOnAPlane'), 'snakes_on_a_plane')
-        self.assertEqual(camel_to_snake('snakes_on_a_plane'), 'snakes_on_a_plane')
-        self.assertEqual(camel_to_snake('IPhoneHysteria'), 'i_phone_hysteria')
-        self.assertEqual(camel_to_snake('iPhoneHysteria'), 'i_phone_hysteria')
+    def test_camel2snake(self):
+        pairs = (
+            ('snakesOnAPlane', 'snakes_on_a_plane'),
+            ('SnakesOnAPlane', 'snakes_on_a_plane'),
+            ('snakes_on_a_plane', 'snakes_on_a_plane'),
+            ('IPhoneHysteria', 'i_phone_hysteria'),
+            ('iPhoneHysteria', 'i_phone_hysteria'),
+        )
+
+        for c, s in pairs:
+            self.assertEqual(camel2snake(c), s)
+
+    def test_snake2camel(self):
+        pairs = (
+            ('snakes_on_a_plane', 'SnakesOnAPlane'),
+            ('SnakesOnAPlane', 'SnakesOnAPlane'),
+            ('i_phone_hysteria', 'IPhoneHysteria'),
+        )
+
+        for s, c in pairs:
+            self.assertEqual(snake_to_camel(s), c)
